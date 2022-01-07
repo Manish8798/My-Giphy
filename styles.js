@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
   title: {
     paddingHorizontal: W(10),
-    paddingVertical: H(2),
+    paddingVertical: H(10),
     color: 'black',
     alignSelf: 'center',
     fontFamily: 'arial',
