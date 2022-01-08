@@ -1,10 +1,11 @@
 import {StyleSheet} from 'react-native';
 import {H, W} from './utils/DimensionCalculator';
+import ColorSchema from './utils/ColorSchema';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: ColorSchema.Black2,
   },
   text: {
     top: '40%',
@@ -12,11 +13,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     fontWeight: 'bold',
     fontSize: 20,
-    color: 'gray',
+    color: ColorSchema.White1,
   },
   header: {
     height: H(60),
-    backgroundColor: '#141414',
+    backgroundColor: ColorSchema.Black3,
     alignItems: 'center',
     justifyContent: 'center',
     flex: 0.1,
@@ -24,52 +25,50 @@ const styles = StyleSheet.create({
   headText: {
     fontWeight: 'bold',
     fontSize: 20,
-    color: 'gray',
-    marginBottom: H(10),
+    color: ColorSchema.White1,
+    marginBottom: H(20),
+    marginStart: W(2),
   },
   subContainer: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     // paddingVertical: H(1),
   },
   input: {
     height: H(50),
     marginVertical: H(10),
-    marginHorizontal: W(10),
+    marginHorizontal: W(8),
     borderWidth: 1,
     padding: 10,
     borderRadius: 10,
-    color: 'black',
-    backgroundColor: 'white',
+    color: ColorSchema.White1,
+    backgroundColor: ColorSchema.Black4,
     alignSelf: 'stretch',
     borderColor: 'gray',
-    fontSize: 16
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   image: {
     width: '100%',
     height: 200,
-    borderBottomWidth: 1,
+    // borderBottomWidth: 1,
     borderColor: 'gray',
     marginBottom: H(1),
     // marginHorizontal: W(1),
-    backgroundColor: 'white',
+    backgroundColor: 'gray',
     alignSelf: 'center',
-    borderTopEndRadius: 8,
-    borderTopStartRadius: 8,
   },
   title: {
-    paddingVertical: H(10),
+    paddingTop: H(10),
     paddingHorizontal: W(10),
-    color: 'black',
+    color: ColorSchema.White1,
     alignSelf: 'center',
-    fontFamily: 'arial',
+    fontWeight: 'bold',
   },
   item: {
-    borderRadius: 8,
-    borderWidth: 1,
     borderColor: 'gray',
-    marginBottom: H(16),
-    marginHorizontal: W(2),
+    marginBottom: H(10),
+    marginHorizontal: W(1),
   },
   searchContainer: {
     marginVertical: H(10),
@@ -77,7 +76,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   list: {
-    marginHorizontal: H(10),
+    marginHorizontal: H(1),
   },
   loader: {
     flex: 1,
@@ -92,6 +91,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     padding: 10,
+  },
+  line: {
+    height: H(2),
+    backgroundColor: ColorSchema.GRAY1,
+    marginBottom: H(20),
   },
 });
 export default styles;

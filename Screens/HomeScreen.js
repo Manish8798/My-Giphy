@@ -14,6 +14,7 @@ import {getGifs} from '../api/ApiManager';
 import {useIsFocused} from '@react-navigation/native';
 import Toast from 'react-native-simple-toast';
 import FastImage from 'react-native-fast-image';
+import ColorSchema from '../utils/ColorSchema';
 
 const HomeScreen = props => {
   const [text, onChangeText] = React.useState('');
@@ -88,7 +89,7 @@ const HomeScreen = props => {
   const loader = () => {
     return (
       <View style={[styles.loader, styles.horizontal]}>
-        <ActivityIndicator color={'black'} size={"large"} />
+        <ActivityIndicator color={'red'} size={'large'} />
       </View>
     );
   };
@@ -103,7 +104,7 @@ const HomeScreen = props => {
           onChangeText={onChangeText}
           value={text}
           placeholder="Search here..."
-          placeholderTextColor={'gray'}
+          placeholderTextColor={ColorSchema.Black1}
           onChange={() => props.navigation.navigate('Search Screen')}
         />
       </View>
@@ -125,6 +126,9 @@ const HomeScreen = props => {
             // onEndReached={() => loadMoreData()}
             onMomentumScrollBegin={() => setDuringMomentum(false)}
             keyExtractor={(item, index) => index}
+            ItemSeparatorComponent={() => {
+              return <View style={styles.line}></View>;
+            }}
             ListHeaderComponent={() => (
               <Text
                 style={[

@@ -11,6 +11,7 @@ import {getSearchResults} from '../api/ApiManager';
 import styles from '../styles';
 import Toast from 'react-native-simple-toast';
 import FastImage from 'react-native-fast-image';
+import ColorSchema from '../utils/ColorSchema';
 
 const SearchScreen = props => {
   const [text, setText] = React.useState('');
@@ -68,7 +69,7 @@ const SearchScreen = props => {
         <TextInput
           style={[styles.input]}
           placeholder="Enter Keyword"
-          placeholderTextColor={'gray'}
+          placeholderTextColor={ColorSchema.Black1}
           onChangeText={t => onSearch(t)}
           value={text}
         />
