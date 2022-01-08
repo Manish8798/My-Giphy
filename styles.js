@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: H(1),
     marginHorizontal: W(1),
+    backgroundColor: 'gray',
     alignSelf: 'center',
   },
   title: {
