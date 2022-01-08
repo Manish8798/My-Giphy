@@ -10,12 +10,14 @@ import {
 import {getSearchResults} from '../api/ApiManager';
 import styles from '../styles';
 import Toast from 'react-native-simple-toast';
+import FastImage from 'react-native-fast-image';
 
 const SearchScreen = props => {
   const [text, setText] = React.useState('');
   const [data, setData] = React.useState([]);
   const [limit, setLimit] = React.useState(25);
   const [count, setCount] = React.useState(1);
+  const [duringMomentum, setDuringMomentum] = React.useState(true);
   const onSearch = keyword => {
     console.log('onSearch => ' + keyword);
     setText(keyword);
@@ -76,8 +78,15 @@ const SearchScreen = props => {
           <FlatList
             initialNumToRender={5}
             onEndReachedThreshold={0.5}
+            onEndReached={({distanceFromEnd}) => {
+              if (!duringMomentum) {
+                loadMoreData();
+                setDuringMomentum(true);
+              }
+            }}
+            // onEndReached={() => loadMoreData()}
+            onMomentumScrollBegin={() => setDuringMomentum(false)}
             keyExtractor={(item, index) => index}
-            onEndReached={() => loadMoreData()}
             ListHeaderComponent={() => (
               <Text
                 style={styles.headText}>{`Search Results For "${text}"`}</Text>
@@ -88,10 +97,13 @@ const SearchScreen = props => {
             renderItem={({item, index}) => {
               return (
                 <View key={index} style={styles.item}>
-                  <Image
-                    resizeMode="stretch"
+                  <FastImage
+                    resizeMode={FastImage.resizeMode.stretch}
                     style={styles.image}
-                    source={{uri: item?.images?.fixed_height_downsampled?.url}}
+                    source={{
+                      uri: item?.images?.fixed_height_downsampled?.url,
+                      priority: FastImage.priority.normal,
+                    }}
                   />
                   <Text
                     numberOfLines={1}

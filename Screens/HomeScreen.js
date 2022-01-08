@@ -13,6 +13,7 @@ import styles from '../styles';
 import {getGifs} from '../api/ApiManager';
 import {useIsFocused} from '@react-navigation/native';
 import Toast from 'react-native-simple-toast';
+import FastImage from 'react-native-fast-image';
 
 const HomeScreen = props => {
   const [text, onChangeText] = React.useState('');
@@ -20,6 +21,7 @@ const HomeScreen = props => {
   const [limit, setLimit] = React.useState(25);
   const [loading, setLoading] = React.useState(true);
   const [count, setCount] = React.useState(1);
+  const [duringMomentum, setDuringMomentum] = React.useState(true);
   const isFocused = useIsFocused();
   React.useEffect(() => {
     let isMounted = true;
@@ -111,21 +113,39 @@ const HomeScreen = props => {
         <View style={styles.subContainer}>
           <FlatList
             data={data}
+            style={styles.list}
             initialNumToRender={5}
             onEndReachedThreshold={0.5}
-            onEndReached={() => loadMoreData()}
+            onEndReached={({distanceFromEnd}) => {
+              if (!duringMomentum) {
+                loadMoreData();
+                setDuringMomentum(true);
+              }
+            }}
+            // onEndReached={() => loadMoreData()}
+            onMomentumScrollBegin={() => setDuringMomentum(false)}
             keyExtractor={(item, index) => index}
+            ListHeaderComponent={() => (
+              <Text
+                style={[
+                  styles.headText,
+                  {marginVertical: 10},
+                ]}>{`Trending Gifs`}</Text>
+            )}
             renderItem={({item, index}) => {
               // console.log(index);
               return (
                 <View key={index} style={styles.item}>
                   {
-                    <Image
-                      resizeMode="stretch"
+                    <FastImage
+                      resizeMode={FastImage.resizeMode.stretch}
                       style={styles.image}
                       source={
                         item?.images?.fixed_height_downsampled?.url
-                          ? {uri: item?.images?.fixed_height_downsampled?.url}
+                          ? {
+                              uri: item?.images?.fixed_height_downsampled?.url,
+                              priority: FastImage.priority.normal,
+                            }
                           : require('../utils/broken.png')
                       }
                     />

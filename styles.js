@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#141414',
     alignItems: 'center',
     justifyContent: 'center',
-    flex: 0.2,
+    flex: 0.1,
   },
   headText: {
     fontWeight: 'bold',
@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
   },
   input: {
     height: H(50),
-    margin: 10,
+    marginVertical: H(10),
+    marginHorizontal: W(10),
     borderWidth: 1,
     padding: 10,
     borderRadius: 10,
@@ -48,9 +49,11 @@ const styles = StyleSheet.create({
     height: 200,
     borderWidth: 1,
     marginBottom: H(1),
-    marginHorizontal: W(1),
-    backgroundColor: 'gray',
+    // marginHorizontal: W(1),
+    backgroundColor: 'white',
     alignSelf: 'center',
+    borderTopEndRadius: 8,
+    borderTopStartRadius: 8,
   },
   title: {
     paddingHorizontal: W(10),
@@ -60,16 +63,17 @@ const styles = StyleSheet.create({
     fontFamily: 'arial',
   },
   item: {
-    borderRadius: 2,
+    borderRadius: 8,
     borderWidth: 0.8,
     borderColor: 'grey',
-    marginBottom: H(10),
+    marginBottom: H(12),
     marginHorizontal: W(2),
+    elevation: 2
   },
   searchContainer: {
     marginVertical: H(10),
     paddingVertical: H(1),
-    flex: 1
+    flex: 1,
   },
   list: {
     marginHorizontal: H(10),
