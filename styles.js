@@ -67,12 +67,12 @@ const styles = StyleSheet.create({
   },
   item: {
     borderColor: 'gray',
-    marginBottom: H(10),
+    marginBottom: H(15),
     // marginHorizontal: W(1),
   },
   searchContainer: {
-    marginVertical: H(10),
-    paddingVertical: H(1),
+    marginTop: H(10),
+    paddingTop: H(5),
     flex: 1,
   },
   list: {
