@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     padding: 10,
+    backgroundColor: ColorSchema.Black2,
   },
   line: {
     height: H(2),

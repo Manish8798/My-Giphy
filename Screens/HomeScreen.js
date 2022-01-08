@@ -8,6 +8,7 @@ import {
   Image,
   ScrollView,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
 import styles from '../styles';
 import {getGifs} from '../api/ApiManager';
@@ -23,6 +24,7 @@ const HomeScreen = props => {
   const [loading, setLoading] = React.useState(true);
   const [count, setCount] = React.useState(1);
   const [duringMomentum, setDuringMomentum] = React.useState(true);
+  const [failed, setFailed] = React.useState(false);
   const isFocused = useIsFocused();
   React.useEffect(() => {
     let isMounted = true;
@@ -41,17 +43,19 @@ const HomeScreen = props => {
     getGifs(limit)
       .then(res => {
         if (res.meta.status == 200) {
-          //   console.log(res.data[0].images.original.url);
           setData(res?.data);
           setCount(res?.pagination?.count);
           setLoading(false);
+          setFailed(false);
         } else {
           setLoading(false);
+          setFailed(false);
         }
       })
       .catch(err => {
         console.log(err);
         setLoading(false);
+        setFailed(true);
         Toast.showWithGravity(
           'Something went wrong',
           Toast.SHORT,
@@ -82,6 +86,11 @@ const HomeScreen = props => {
       });
   };
 
+  const onRetry = () => {
+    setLoading(true);
+    getTrendingGifs();
+  };
+
   const onFocus = () => {
     props.navigation.navigate('Search Screen');
   };
@@ -93,6 +102,16 @@ const HomeScreen = props => {
       </View>
     );
   };
+
+  if (failed) {
+    return (
+      <View style={[styles.failedText, styles.horizontal]}>
+        <TouchableOpacity onPress={() => onRetry()}>
+          <Text style={styles.headText}>Tap to retry</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -149,6 +168,7 @@ const HomeScreen = props => {
                           ? {
                               uri: item?.images?.fixed_height_downsampled?.url,
                               priority: FastImage.priority.normal,
+                              cache: FastImage.cacheControl.immutable,
                             }
                           : require('../utils/broken.png')
                       }
