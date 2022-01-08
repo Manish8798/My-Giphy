@@ -22,7 +22,7 @@ const SearchScreen = props => {
   const onSearch = keyword => {
     console.log('onSearch => ' + keyword);
     setText(keyword);
-    getSearchResults(keyword, limit)
+    getSearchResults(keyword.trim(), limit)
       .then(res => {
         if (res.meta.status == 200) {
           setData(res?.data);
@@ -73,7 +73,7 @@ const SearchScreen = props => {
           onChangeText={t => onSearch(t)}
           value={text}
         />
-        {data.length == 0 ? (
+        {text.trim().length == 0 ? (
           <Text style={styles.text}>Enter Keyword to Search</Text>
         ) : (
           <FlatList
@@ -90,7 +90,9 @@ const SearchScreen = props => {
             keyExtractor={(item, index) => index}
             ListHeaderComponent={() => (
               <Text
-                style={styles.headText}>{`Search Results For "${text}"`}</Text>
+                style={
+                  styles.headText
+                }>{`Search Results For "${text.trim()}"`}</Text>
             )}
             style={styles.list}
             data={data}
