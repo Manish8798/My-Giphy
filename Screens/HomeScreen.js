@@ -88,7 +88,7 @@ const HomeScreen = props => {
   const loader = () => {
     return (
       <View style={[styles.loader, styles.horizontal]}>
-        <ActivityIndicator color={'black'} />
+        <ActivityIndicator color={'black'} size={"large"} />
       </View>
     );
   };
@@ -102,7 +102,7 @@ const HomeScreen = props => {
           style={styles.input}
           onChangeText={onChangeText}
           value={text}
-          placeholder="Search"
+          placeholder="Search here..."
           placeholderTextColor={'gray'}
           onChange={() => props.navigation.navigate('Search Screen')}
         />

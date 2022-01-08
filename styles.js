@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   subContainer: {
     flex: 1,
     backgroundColor: 'white',
-    paddingVertical: H(1),
+    // paddingVertical: H(1),
   },
   input: {
     height: H(50),
@@ -43,11 +43,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignSelf: 'stretch',
     borderColor: 'gray',
+    fontSize: 16
   },
   image: {
     width: '100%',
     height: 200,
-    borderWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: 'gray',
     marginBottom: H(1),
     // marginHorizontal: W(1),
     backgroundColor: 'white',
@@ -56,19 +58,18 @@ const styles = StyleSheet.create({
     borderTopStartRadius: 8,
   },
   title: {
-    paddingHorizontal: W(10),
     paddingVertical: H(10),
+    paddingHorizontal: W(10),
     color: 'black',
     alignSelf: 'center',
     fontFamily: 'arial',
   },
   item: {
     borderRadius: 8,
-    borderWidth: 0.8,
-    borderColor: 'grey',
-    marginBottom: H(12),
+    borderWidth: 1,
+    borderColor: 'gray',
+    marginBottom: H(16),
     marginHorizontal: W(2),
-    elevation: 2
   },
   searchContainer: {
     marginVertical: H(10),
