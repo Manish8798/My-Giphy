@@ -95,6 +95,9 @@ const SearchScreen = props => {
             style={styles.list}
             data={data}
             // extraData={data}
+            ItemSeparatorComponent={() => {
+              return <View style={styles.line}></View>;
+            }}
             renderItem={({item, index}) => {
               return (
                 <View key={index} style={styles.item}>

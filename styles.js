@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   item: {
     borderColor: 'gray',
     marginBottom: H(10),
-    marginHorizontal: W(1),
+    // marginHorizontal: W(1),
   },
   searchContainer: {
     marginVertical: H(10),
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   list: {
-    marginHorizontal: H(1),
+    // marginHorizontal: H(1),
   },
   loader: {
     flex: 1,
