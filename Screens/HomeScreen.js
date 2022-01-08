@@ -16,7 +16,7 @@ import {useIsFocused} from '@react-navigation/native';
 const HomeScreen = props => {
   const [text, onChangeText] = React.useState('');
   const [data, setData] = React.useState([]);
-  const [limit, setLimit] = React.useState(50);
+  const [limit, setLimit] = React.useState(25);
   const [loading, setLoading] = React.useState(true);
   const [isDefault, setIsDefault] = React.useState(true);
   const isFocused = useIsFocused();
@@ -47,6 +47,21 @@ const HomeScreen = props => {
       .catch(err => {
         console.log(err);
         setLoading(false);
+      });
+  };
+
+  const loadMoreData = () => {
+    setLimit(limit + 10);
+    getGifs(limit + 10)
+      .then(res => {
+        if (res.meta.status == 200) {
+          setData([...res?.data]);
+        } else {
+          console.log(JSON.stringify(res));
+        }
+      })
+      .catch(err => {
+        console.log(err);
       });
   };
 
@@ -81,8 +96,10 @@ const HomeScreen = props => {
       ) : (
         <View style={styles.subContainer}>
           <FlatList
-            initialNumToRender={5}
             data={data}
+            initialNumToRender={5}
+            onEndReachedThreshold={0.5}
+            onEndReached={() => loadMoreData()}
             keyExtractor={(item, index) => index}
             renderItem={({item, index}) => {
               // console.log(index);
@@ -93,8 +110,8 @@ const HomeScreen = props => {
                       resizeMode="stretch"
                       style={styles.image}
                       source={
-                        item?.images?.downsized?.url
-                          ? {uri: item?.images?.downsized?.url}
+                        item?.images?.fixed_height_downsampled?.url
+                          ? {uri: item?.images?.fixed_height_downsampled?.url}
                           : require('../utils/broken.png')
                       }
                     />

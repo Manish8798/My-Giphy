@@ -37,8 +37,7 @@ const SearchScreen = props => {
     getSearchResults(text, limit + 10)
       .then(res => {
         if (res.meta.status == 200) {
-          let tempData = [...data, ...res?.data];
-          setData(tempData);
+          setData([...res?.data]);
         } else {
           console.log(JSON.stringify(res));
         }
@@ -72,14 +71,14 @@ const SearchScreen = props => {
             )}
             style={styles.list}
             data={data}
-            extraData={data}
+            // extraData={data}
             renderItem={({item, index}) => {
               return (
                 <View key={index} style={styles.item}>
                   <Image
                     resizeMode="stretch"
                     style={styles.image}
-                    source={{uri: item?.images?.downsized?.url}}
+                    source={{uri: item?.images?.fixed_height_downsampled?.url}}
                   />
                   <Text
                     numberOfLines={1}
