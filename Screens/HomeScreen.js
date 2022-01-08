@@ -58,7 +58,6 @@ const HomeScreen = props => {
   };
 
   const loadMoreData = () => {
-    setLoadMore(true);
     setLimit(limit + 10);
     console.log('load more => ' + limit);
     getGifs(limit + 10)
