@@ -12,13 +12,14 @@ import {
 import styles from '../styles';
 import {getGifs} from '../api/ApiManager';
 import {useIsFocused} from '@react-navigation/native';
+import Toast from 'react-native-simple-toast';
 
 const HomeScreen = props => {
   const [text, onChangeText] = React.useState('');
   const [data, setData] = React.useState([]);
   const [limit, setLimit] = React.useState(25);
   const [loading, setLoading] = React.useState(true);
-  const [isDefault, setIsDefault] = React.useState(true);
+  const [count, setCount] = React.useState(1);
   const isFocused = useIsFocused();
   React.useEffect(() => {
     let isMounted = true;
@@ -39,6 +40,7 @@ const HomeScreen = props => {
         if (res.meta.status == 200) {
           //   console.log(res.data[0].images.original.url);
           setData(res?.data);
+          setCount(res?.pagination?.count);
           setLoading(false);
         } else {
           setLoading(false);
@@ -47,21 +49,33 @@ const HomeScreen = props => {
       .catch(err => {
         console.log(err);
         setLoading(false);
+        Toast.showWithGravity(
+          'Something went wrong',
+          Toast.SHORT,
+          Toast.BOTTOM,
+        );
       });
   };
 
   const loadMoreData = () => {
     setLimit(limit + 10);
+    console.log('load more => ' + limit);
     getGifs(limit + 10)
       .then(res => {
-        if (res.meta.status == 200) {
+        if (res.meta.status == 200 && count != res?.pagination?.count) {
           setData([...res?.data]);
+          setCount(res?.pagination?.count);
         } else {
-          console.log(JSON.stringify(res));
+          // console.log(JSON.stringify(res));
         }
       })
       .catch(err => {
         console.log(err);
+        Toast.showWithGravity(
+          'Something went wrong',
+          Toast.SHORT,
+          Toast.BOTTOM,
+        );
       });
   };
 

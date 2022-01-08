@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 200,
     borderWidth: 1,
-    marginVertical: H(1),
+    marginBottom: H(1),
     marginHorizontal: W(1),
     alignSelf: 'center',
   },

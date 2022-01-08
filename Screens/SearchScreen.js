@@ -9,12 +9,13 @@ import {
 } from 'react-native';
 import {getSearchResults} from '../api/ApiManager';
 import styles from '../styles';
+import Toast from 'react-native-simple-toast';
 
 const SearchScreen = props => {
   const [text, setText] = React.useState('');
   const [data, setData] = React.useState([]);
   const [limit, setLimit] = React.useState(25);
-
+  const [count, setCount] = React.useState(1);
   const onSearch = keyword => {
     console.log('onSearch => ' + keyword);
     setText(keyword);
@@ -22,12 +23,18 @@ const SearchScreen = props => {
       .then(res => {
         if (res.meta.status == 200) {
           setData(res?.data);
+          setCount(res?.pagination?.count);
         } else {
           setData([]);
         }
       })
       .catch(err => {
         console.log(err);
+        Toast.showWithGravity(
+          'Something went wrong',
+          Toast.SHORT,
+          Toast.BOTTOM,
+        );
       });
   };
 
@@ -36,14 +43,20 @@ const SearchScreen = props => {
     console.log('load more => ' + limit);
     getSearchResults(text, limit + 10)
       .then(res => {
-        if (res.meta.status == 200) {
+        if (res.meta.status == 200 && count != res?.pagination?.count) {
           setData([...res?.data]);
+          setCount(res?.pagination?.count);
         } else {
-          console.log(JSON.stringify(res));
+          // console.log(JSON.stringify(res));
         }
       })
       .catch(err => {
         console.log(err);
+        Toast.showWithGravity(
+          'Something went wrong',
+          Toast.SHORT,
+          Toast.BOTTOM,
+        );
       });
   };
 
