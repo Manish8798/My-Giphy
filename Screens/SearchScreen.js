@@ -67,6 +67,7 @@ const SearchScreen = props => {
     <SafeAreaView style={styles.container}>
       <View style={styles.searchContainer}>
         <TextInput
+          autoFocus={true}
           style={[styles.input]}
           placeholder="Enter Keyword"
           placeholderTextColor={ColorSchema.Black1}

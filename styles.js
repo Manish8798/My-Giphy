@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     fontWeight: 'bold',
     fontSize: 20,
-    color: ColorSchema.White1,
+    color: ColorSchema.Black1,
   },
   header: {
     height: H(60),
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     marginHorizontal: W(8),
     borderWidth: 1,
     padding: 10,
-    borderRadius: 10,
+    borderRadius: 4,
     color: ColorSchema.White1,
     backgroundColor: ColorSchema.Black4,
     alignSelf: 'stretch',
