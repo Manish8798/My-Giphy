@@ -18,12 +18,19 @@ const HomeScreen = props => {
   const [data, setData] = React.useState([]);
   const [limit, setLimit] = React.useState(50);
   const [loading, setLoading] = React.useState(true);
+  const [isDefault, setIsDefault] = React.useState(true);
   const isFocused = useIsFocused();
   React.useEffect(() => {
-    if (data.length == 0) {
+    let isMounted = true;
+    if (data.length == 0 && isMounted) {
       getTrendingGifs();
+    } else {
+      console.log('aborted setState on unmounted component');
     }
     onChangeText('');
+    return () => {
+      isMounted = false;
+    };
   }, [isFocused]);
 
   const getTrendingGifs = () => {
@@ -78,16 +85,18 @@ const HomeScreen = props => {
             data={data}
             keyExtractor={(item, index) => index}
             renderItem={({item, index}) => {
-              console.log(index);
+              // console.log(index);
               return (
                 <View key={index} style={styles.item}>
                   {
                     <Image
-                      onLoadStart={() => console.log('start')}
-                      onLoadEnd={() => console.log('end')}
                       resizeMode="stretch"
                       style={styles.image}
-                      source={{uri: item?.images?.downsized?.url}}
+                      source={
+                        item?.images?.downsized?.url
+                          ? {uri: item?.images?.downsized?.url}
+                          : require('../utils/broken.png')
+                      }
                     />
                   }
                   <Text
