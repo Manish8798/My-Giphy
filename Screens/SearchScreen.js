@@ -34,7 +34,7 @@ const SearchScreen = props => {
       .catch(err => {
         console.log(err);
         Toast.showWithGravity(
-          'Something went wrong',
+          'Something went wrong, check your internet connection',
           Toast.SHORT,
           Toast.BOTTOM,
         );
@@ -56,7 +56,7 @@ const SearchScreen = props => {
       .catch(err => {
         console.log(err);
         Toast.showWithGravity(
-          'Something went wrong',
+          'Something went wrong, check your internet connection',
           Toast.SHORT,
           Toast.BOTTOM,
         );
