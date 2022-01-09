@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: H(50),
+    minHeight: H(50),
     marginVertical: H(10),
     marginHorizontal: W(8),
     borderWidth: 1,
